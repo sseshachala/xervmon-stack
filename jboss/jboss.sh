@@ -7,9 +7,9 @@ DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 read_config ${DIR}/jboss.conf
 #install_packages fortune
 
-#http://sourceforge.net/projects/jboss/files/JBoss/JBoss-6.0.0.Final/jboss-as-distribution-6.0.0.Final.zip/download
+#update_package_list
 
-update_package_list
+install_packages unzip
 
 #install java
 case ${OS_TYPE} in
@@ -24,18 +24,29 @@ esac
 #download jboss
 jboss_version=${major_version}.${minor_version}
 jboss_file=jboss-as-distribution-${jboss_version}.zip
-wget -O ~/${jboss_file} http://sourceforge.net/projects/jboss/files/JBoss/JBoss-${jboss_version}/{jboss_file}/download
+
+#wget -O ~/${jboss_file} http://download.jboss.org/jbossas/${major_version}/jboss-as-${jboss_version}/jboss-as-${jboss_version}.zip
 
 #unpack it to the recommended location
-${SUDO} unzip ~/${jboss_file} -d /usr/local/
+${SUDO} unzip ~/${jboss_file} -d /usr/share/
 
 #create jboss user
-${SUDO} useradd -m -d /usr/local/jboss -s /bin/sh jboss
+${SUDO} useradd -m -d /usr/share/jboss -s /bin/sh jboss
 
-${SUDO} chown -R jboss:jboss /usr/local/jboss-${jboss_version}/
+${SUDO} chown -R jboss:jboss /usr/share/jboss-as-${jboss_version}/
 
-#create a simlink to it from where JBoss will expect it to be – /usr/local/jboss
+#create a simlink to it from where JBoss will expect it to be – /usr/share/jboss-as
+${SUDO} rm -rf /usr/share/jboss-as
+${SUDO} ln -s /usr/share/jboss-as-${jboss_version} /usr/share/jboss-as
 
-${SUDO} rm -rf /usr/local/jboss
-${SUDO} ln -s /usr/local/jboss-${jboss_version} /usr/local/jboss
+#create additional directories
+for dir in /var/run/jboss-as /var/log/jboss-as /etc/jboss-as; do
+	if [[ ! -d ${dir} ]]; then
+		${SUDO} mkdir -p ${dir}
+		${SUDO} chown -R jboss:jboss ${dir}
+	fi;
+done
+
+${SUDO} ln -s /usr/share/jboss-as/bin/init.d/jboss-as.conf /etc/jboss-as
+${SUDO} ln -s /usr/share/jboss-as/bin/init.d/jboss-as-standalone.sh /etc/init.d/jboss
 
