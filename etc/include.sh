@@ -41,5 +41,17 @@ function read_config {
 	export minor_version=`grep minor_version ${conf_file} | awk '{print $2}'`
 }
 
+#function for installing startup scripts
+function install_startup {
+	case ${OS_TYPE} in
+		"apt")
+			update-rc.d $* defaults
+			;;
+		"yum")
+			chkconfig --level 345 $* on
+			;;
+	esac
+}
+
 
 
