@@ -45,7 +45,7 @@ function read_config {
 function install_startup {
 	case ${OS_TYPE} in
 		"apt")
-			update-rc.d $* defaults
+			sudo update-rc.d $* defaults
 			;;
 		"yum")
 			chkconfig --level 345 $* on
