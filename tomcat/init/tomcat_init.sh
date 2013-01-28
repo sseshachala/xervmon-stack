@@ -16,7 +16,7 @@
  
 ## Source function library.
 #. /etc/rc.d/init.d/functions
-export JAVA_HOME=/usr/java/default
+#export JAVA_HOME=/usr/java/default
 export JAVA_OPTS="-Dfile.encoding=UTF-8 \
   -Dcatalina.logbase=/var/log/tomcat7 \
   -Dnet.sf.ehcache.skipUpdateCheck=true \
@@ -27,7 +27,7 @@ export JAVA_OPTS="-Dfile.encoding=UTF-8 \
   -XX:MaxPermSize=128m \
   -Xms512m -Xmx512m"
 export PATH=$JAVA_HOME/bin:$PATH
-TOMCAT_HOME=/usr/share/tomcat7
+TOMCAT_HOME=/usr/share/tomcat
 SHUTDOWN_WAIT=20
  
 tomcat_pid() {
