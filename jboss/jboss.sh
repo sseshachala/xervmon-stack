@@ -47,6 +47,8 @@ for dir in /var/run/jboss-as /var/log/jboss-as /etc/jboss-as; do
 	fi;
 done
 
-${SUDO} ln -s /usr/share/jboss-as/bin/init.d/jboss-as.conf /etc/jboss-as
-${SUDO} ln -s /usr/share/jboss-as/bin/init.d/jboss-as-standalone.sh /etc/init.d/jboss
+${SUDO} cp ${DIR}/init/jboss-as.conf /etc/jboss-as
+${SUDO} cp ${DIR}/init/jboss_init.sh /etc/init.d/jboss
+
+${SUDO} /etc/init.d/jboss start
 
