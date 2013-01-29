@@ -11,6 +11,12 @@ else
 	exit 1
 fi;
 
+#get detailed OS info
+DISTRIBIUTOR=`lsb_release -i -r | grep "Distributor" | awk '{print $3}'`
+RELEASE=`lsb_release -i -r | grep "Release" | awk '{print $2}'`
+MAJOR_RELEASE=`echo ${RELEASE} | cut -d"." -f 1`
+MINOR_RELEASE=`echo ${RELEASE} | cut -d"." -f 1`
+
 #function for installing packages independent of OS
 function install_packages {
 	case ${OS_TYPE} in
