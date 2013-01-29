@@ -21,7 +21,7 @@ case ${OS_TYPE} in
 			rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm
 			rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
 			yum --enablerepo=remi install -y mysql mysql-server php php-mysql php-fpm
-			cp ${DIR}/conf/default /etc/nginx/sites-available/default
+			cp ${DIR}/conf/default.conf /etc/nginx/conf.d/default.conf
 			service ngninx start
 			service php-fpm start
 			chkconfig --levels 235 mysqld on
