@@ -22,7 +22,7 @@ case ${OS_TYPE} in
 			rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
 			yum --enablerepo=remi install -y mysql mysql-server php php-mysql php-fpm nginx
 			cp ${DIR}/conf/default.conf /etc/nginx/conf.d/default.conf
-			service ngninx start
+			service nginx start
 			service php-fpm start
 			chkconfig --levels 235 mysqld on 2>/dev/null
 			chkconfig --levels 235 mysql on 2>/dev/null
