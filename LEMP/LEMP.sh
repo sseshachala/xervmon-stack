@@ -25,6 +25,7 @@ case ${OS_TYPE} in
 			service ngninx start
 			service php-fpm start
 			chkconfig --levels 235 mysqld on
+			chkconfig --levels 235 mysql on
 			chkconfig --levels 235 nginx on
 			chkconfig --levels 235 php-fpm on
 			;;
