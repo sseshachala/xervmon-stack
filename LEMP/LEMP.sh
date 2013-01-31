@@ -20,12 +20,13 @@ case ${OS_TYPE} in
 			rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm
 			rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm
 			rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
-			yum --enablerepo=remi install -y mysql mysql-server php php-mysql php-fpm nginx
+			rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-5.rpm
+			yum --enablerepo=remi install -y mysql mysql-server php php-mysql php-fpm
 			cp ${DIR}/conf/default.conf /etc/nginx/conf.d/default.conf
-			service nginx start
+			service ngninx start
 			service php-fpm start
-			chkconfig --levels 235 mysqld on 2>/dev/null
-			chkconfig --levels 235 mysql on 2>/dev/null
+			chkconfig --levels 235 mysqld on
+			chkconfig --levels 235 mysql on
 			chkconfig --levels 235 nginx on
 			chkconfig --levels 235 php-fpm on
 			;;
