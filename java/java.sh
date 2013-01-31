@@ -4,6 +4,7 @@ DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 . ${DIR}/../etc/include.sh
 
+echo "Installing Java..."
 #install java
 case ${OS_TYPE} in
 		"apt")

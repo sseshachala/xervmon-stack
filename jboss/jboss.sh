@@ -5,13 +5,14 @@ DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . ${DIR}/../etc/include.sh
 
 read_config ${DIR}/jboss.conf
-#install_packages fortune
 
-#update_package_list
+update_package_list
 
+echo "Installing unzip..."
 install_packages unzip
 
 #install java
+echo "Installing Java..."
 case ${OS_TYPE} in
 		"apt")
 			sudo apt-get install openjdk-6-jdk -y
@@ -21,6 +22,7 @@ case ${OS_TYPE} in
 			;;
 esac
 
+echo "Downloading JBoss..."
 #download jboss
 jboss_version=${major_version}.${minor_version}
 jboss_file=jboss-as-distribution-${jboss_version}.zip
@@ -30,6 +32,7 @@ wget -O ~/${jboss_file} http://download.jboss.org/jbossas/${major_version}/jboss
 #unpack it to the recommended location
 ${SUDO} unzip ~/${jboss_file} -d /usr/share/
 
+echo "Adding JBoss user..."
 #create jboss user
 ${SUDO} useradd -m -d /usr/share/jboss -s /bin/sh jboss
 
@@ -40,6 +43,7 @@ ${SUDO} rm -rf /usr/share/jboss-as
 ${SUDO} rm -rf /etc/init.d/jboss
 ${SUDO} ln -s /usr/share/jboss-as-${jboss_version} /usr/share/jboss-as
 
+echo "Creating additional directories for JBoss"
 #create additional directories
 for dir in /var/run/jboss-as /var/log/jboss-as /etc/jboss-as; do
 	if [[ ! -d ${dir} ]]; then
@@ -48,6 +52,7 @@ for dir in /var/run/jboss-as /var/log/jboss-as /etc/jboss-as; do
 	fi;
 done
 
+echo "Copying JBoss init script"
 ${SUDO} cp ${DIR}/init/jboss-as.conf /etc/jboss-as
 case ${OS_TYPE} in
 		"apt")

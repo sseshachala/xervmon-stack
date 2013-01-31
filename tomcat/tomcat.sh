@@ -6,8 +6,9 @@ DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 read_config ${DIR}/tomcat.conf
 
-#update_package_list
+update_package_list
 
+echo "Installing unzip..."
 install_packages unzip
 
 #install java
@@ -24,13 +25,13 @@ esac
 tomcat_version=${major_version}.${minor_version}
 tomcat_file=tomcat-${tomcat_version}.zip
 
-#http://www.us.apache.org/dist/tomcat/tomcat-7/v7.0.35/bin/apache-tomcat-7.0.35.zip
-#http://mirror.nexcess.net/apache/tomcat/tomcat-${major_version}/v${major_version}.${minor_version}/bin/apache-tomcat-${major_version}.${minor_version}.zip
+echo "Downloading Tomcat..."
 wget -O ~/${tomcat_file} http://www.us.apache.org/dist//tomcat/tomcat-${major_version}/v${major_version}.${minor_version}/bin/apache-tomcat-${major_version}.${minor_version}.zip
 
 #unpack it to the recommended location
 ${SUDO} unzip ~/${tomcat_file} -d /usr/share/
 
+echo "Adding Tomcat user..."
 #create tomcat user
 ${SUDO} useradd -m -d /usr/share/tomcat -s /bin/sh tomcat
 
@@ -60,6 +61,7 @@ ${SUDO} chmod +x /usr/share/tomcat/bin/*.sh
 #			;;
 #esac
 
+echo "Installing JBoss init script"
 ${SUDO} cp ${DIR}/init/tomcat_init.sh /etc/init.d/tomcat
 
 install_startup tomcat

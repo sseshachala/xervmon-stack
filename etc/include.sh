@@ -29,6 +29,7 @@ function install_packages {
 	esac
 }
 
+#function for refreshing package list
 function update_package_list {
 	case ${OS_TYPE} in
 		"apt")
