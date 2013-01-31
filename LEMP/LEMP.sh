@@ -28,11 +28,11 @@ case ${OS_TYPE} in
 			yum --enablerepo=remi install -y mysql mysql-server php php-mysql php-fpm
 			echo "Applying nginx configuration..."
 			cp ${DIR}/conf/default.conf /etc/nginx/conf.d/default.conf
-			service ngninx start
+			service nginx start
 			service php-fpm start
 			echo "Enabling all required init scripts..."
-			chkconfig --levels 235 mysqld on
-			chkconfig --levels 235 mysql on
+			chkconfig --levels 235 mysqld on 2>/dev/null
+			chkconfig --levels 235 mysql on 2>/dev/null
 			chkconfig --levels 235 nginx on
 			chkconfig --levels 235 php-fpm on
 			;;
