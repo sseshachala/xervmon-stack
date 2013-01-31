@@ -22,6 +22,11 @@ To install Tomcat, run:
 
 Tomcat will be installed in the (default) /usr/share/tomcat location, and it will be up on port 8080.
 
+#### Java ####
+To install Java, run:
+
+`./java/java.sh`
+
 #### LEMP ####
 LEMP stack includes nginx, MySQL and PHP, all preconfigured. Root directory will be located at /usr/share/nginx/html for Debian/Ubuntu etc. or /usr/share/nginx/html for RHEL/Centos/OEL.
 To install LEMP, run:
