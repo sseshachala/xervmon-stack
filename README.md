@@ -27,6 +27,8 @@ To install Java, run:
 
 `./java/java.sh`
 
+##set export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-amd64 in/etc/environment on ubuntu
+
 #### LEMP ####
 LEMP stack includes nginx, MySQL and PHP, all preconfigured. Root directory will be located at /usr/share/nginx/html for Debian/Ubuntu etc. or /usr/share/nginx/html for RHEL/Centos/OEL.
 To install LEMP, run:
